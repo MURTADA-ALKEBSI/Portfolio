@@ -1,0 +1,582 @@
+/* =====================================
+    1. إعدادات عامة (تطبق على الجميع)
+===================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #111;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+/* تنسيق الأقسام لمنع الفواصل العشوائية */
+section {
+    display: block;
+    width: 100%;
+    position: relative;
+    background: #111;
+}
+
+/* --- الفواصل الاحترافية بين الأقسام --- */
+/* هذا الكود يضع خطاً جمالياً مضيئاً يفصل بين About و Resume و Portfolio */
+section:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #2ea3f2, transparent);
+    box-shadow: 0 0 10px rgba(46, 163, 242, 0.5);
+    z-index: 5;
+}
+
+/* =====================================
+    2. تنسيقات شاشة الكمبيوتر (Desktop)
+===================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(17, 17, 17, 0.9);
+}
+
+.nav-links { display: flex; gap: 35px; }
+.nav-links a { 
+    text-decoration: none; 
+    color: #cfcfcf; 
+    font-weight: 700; 
+    transition: 0.3s; 
+    padding-bottom: 5px; /* مسافة بسيطة */
+}
+
+.nav-links a:hover, 
+.nav-links a.active { 
+    color: #2ea3f2 !important; 
+    border-bottom: 2px solid #2ea3f2; /* خط نحيف تحت الكلمة لزيادة الجمالية */
+}
+
+
+/* 1. التنسيق الافتراضي للكمبيوتر والوضع الأفقي */
+.hero {
+    height: 100vh;
+    width: 100%;
+    background-image: url("images/A2.png"); /* الصورة العريضة للكمبيوتر */
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed; /* تأثير التثبيت الفخم */
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+    position: relative;
+}
+
+/* 2. التعديل الخاص بالهاتف العمودي (تغيير الخلفية) */
+@media (max-width: 600px) and (orientation: portrait) {
+    .hero {
+        /* هنا نضع الصورة الطولية التي صممتها للهاتف */
+        background-image: url("images/A2-portrait.png"); 
+        
+        /* نلغي التثبيت (fixed) لأنه يسبب مشاكل أداء وتعليق في بعض الهواتف */
+        background-attachment: scroll; 
+        
+        /* التأكد من تمركز الصورة الطولية */
+        background-position: center;
+        
+        /* إلغاء المسافة اليسارية وتوسيط النص */
+        padding-left: 0;
+        justify-content: center;
+        text-align: center;
+    }
+
+
+
+
+
+
+    
+}/* التعديل: ربط الحركة بالأيقونة فقط */
+.phone-animated {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.phone-icon-animated {
+    display: inline-block;
+    animation: phoneShake 2s infinite, phonePulse 2s infinite;
+}
+
+
+.phone-icon {
+    display: inline-block;
+    position: relative;
+    animation: phoneShake 2s infinite, phonePulse 2s infinite;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+@keyframes phoneShake {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(15deg); }
+    20% { transform: rotate(-15deg); }
+    30% { transform: rotate(15deg); }
+    40% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes phonePulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+.phone-animated:hover .phone-icon {
+    animation: none;
+    transform: scale(1.2) rotate(10deg);
+    color: #2ea3f2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hero-content h1 { font-size: 80px; font-weight: 800; margin-bottom: 10px; }
+.hero-content p { font-size: 28px; margin-bottom: 40px; }
+.hero-content h3 { font-size: 28px; font-weight: 800; margin-bottom: 30px; }
+
+/* الأزرار الاحترافية */
+.hero-buttons { display: flex; gap: 20px;font-size: 18px }
+.btn-outline {
+    position: relative; padding: 15px 40px; border: 2px solid white;
+    border-radius: 30px; text-decoration: none; color: white;
+    font-weight: 600; transition: 0.4s; overflow: hidden; z-index: 1;
+}
+.btn-outline::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+    background: white; transition: 0.4s; z-index: -1;
+}
+.btn-outline:hover { color: black; transform: translateY(-3px); }
+.btn-outline:hover::before { width: 100%; }
+
+/* أيقونات التواصل للكمبيوتر */
+.social-wrapper { position: absolute; bottom: 50px; left: 10%; display: flex; gap: 20px; }
+.social {
+    width: 50px; height: 50px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; background: rgba(255,255,255,0.1);
+    color: white; text-decoration: none; transition: 0.3s;
+}
+/* =====================================
+
+   🎨 تأثير توهج العلامة التجارية
+
+===================================== */
+
+.linkedin:hover {
+
+    background: #0077b5;
+
+    box-shadow: 0 0 20px #0077b5;
+
+}
+
+.facebook:hover {
+
+    background: #1877f2;
+
+    box-shadow: 0 0 20px #1877f2;
+
+}
+
+.instagram:hover {
+
+    background: #e1306c;
+
+    box-shadow: 0 0 20px #e1306c;
+
+}
+
+.whatsapp:hover {
+
+    background: #25d366;
+
+    box-shadow: 0 0 20px #25d366;
+
+}
+
+.behance:hover {
+
+    background: #1769ff;
+
+    box-shadow: 0 0 20px #1769ff;
+
+}
+
+
+
+/* أقسام الصور (الافتراضي للكمبيوتر) */
+.full-screen-section, .multi-page-section { min-height: 100vh; width: 100%; }
+.image-container { width: 100%; height: 100vh; overflow: hidden; position: relative; }
+
+/* التحكم في الصور: افتراضياً الكمبيوتر يرى الـ Landscape */
+.landscape-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portrait-img { display: none; }
+
+/* =====================================
+    3. التجاوب (Media Queries)
+===================================== */
+
+/* --- الهاتف في الوضع الأفقي (Landscape) --- */
+@media (max-width: 900px) and (orientation: landscape) {
+    .navbar { padding: 10px 30px; }
+    .hero { padding-left: 5%; align-items: center; }
+    .hero-content h1 { font-size: 38px; margin-bottom: 10px; }
+    .hero-content p { font-size: 18px; margin-bottom: 20px; }
+    .hero-content h3 { font-size: 18px; }
+
+
+    
+    /* منع تداخل الأيقونات مع الأزرار في العرض الأفقي */
+    .hero-buttons { margin-top: 5px; }
+    .social-wrapper { bottom: 15px; left: 5%; gap: 10px; }
+    .social { width: 40px; height: 40px; }
+    
+    /* في الوضع الأفقي للهاتف، نستمر في عرض صور الـ Landscape */
+    .landscape-img { display: block; }
+    .portrait-img { display: none; }
+}
+
+/* --- الهاتف في الوضع العمودي (Portrait) --- */
+@media (max-width: 600px) and (orientation: portrait) {
+    .navbar { padding: 10px; flex-direction: column; gap: 10px; }
+    .nav-links { gap: 25px; font-size: 14px; }
+
+    .hero { 
+        padding-left: 0; justify-content: center; text-align: center;
+        background-attachment: scroll; /* أفضل للأداء السلس في الهواتف */
+    }
+    .hero-content h1 { font-size: 42px; margin-bottom: 10px; }
+    .hero-content p { font-size: 18px; margin-bottom: 50px; }
+    .hero-content h3 { font-size: 20px; margin-bottom: 50px; }
+
+    .hero-buttons { flex-direction: column; align-items: center; width: 100%; font-size: 16px }
+    .btn-outline { width: 85%; padding: 12px; }
+
+    .social-wrapper { left: 50%; transform: translateX(-50%); bottom: 70px; display: flex; gap: 10px  }
+    .social { width: 40px; height: 40px; }
+
+    /* تبديل الصور: إظهار العمودية وإخفاء الأفقية */
+    .landscape-img { display: none; }
+    .portrait-img { 
+        display: block; 
+        width: 100%; 
+        height: 100vh; 
+        object-fit: cover; /* تملأ الشاشة بالطول */
+    }
+
+    /* لضمان دمج الصفحات تحت بعضها في الـ Resume و Portfolio */
+    .image-container { height: 100vh; background: #000; }
+    
+}
+
+/* تحريك أيقونة الهاتف */
+.phone-animated { text-decoration: none; color: white; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.phone-icon { display: inline-block; animation: phoneShake 2s infinite; border-radius: 50%; padding: 5px; }
+
+@keyframes phoneShake {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(15deg); }
+    20%, 40% { transform: rotate(-15deg); }
+}
+
+
+
+
+/* --- 1. الإعداد الافتراضي (الكمبيوتر) --- */
+/* إخفاء أي حاوية تحمل كلاس only-portrait تماماً من العرض */
+.only-portrait {
+    display: none !important; 
+}
+
+/* --- 2. إعدادات الهاتف العمودي --- */
+@media (max-width: 600px) and (orientation: portrait) {
+    /* إظهار الحاويات التي كانت مخفية */
+    .only-portrait {
+        display: flex !important; /* نستخدم flex لأننا عرفناه سابقاً لتوسط الصور */
+        width: 100%;
+        height: 100vh;
+    }
+
+    /* تأكيد أن الصور الطولية تملأ الشاشة */
+    .portrait-img {
+        display: block;
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+    }
+}
+
+/* --- 3. إعدادات الهاتف الأفقي (Landscape) --- */
+@media (max-width: 900px) and (orientation: landscape) {
+    /* نضمن بقاء الحاويات الإضافية مخفية في الوضع الأفقي أيضاً */
+    .only-portrait {
+        display: none !important;
+    }
+}
+
+
+
+
+
+
+
+/* =====================================
+   🎨 أنميشن تدوير الهاتف (Rotate Animation)
+===================================== */
+
+/* إخفاء التنبيه في الكمبيوتر والوضع الأفقي افتراضياً */
+.rotate-device-wrapper {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* أيقونة الهاتف المتحركة */
+.phone-icon-rotate {
+    width: 50px;
+    height: 90px;
+    border: 3px solid #2ea3f2;
+    border-radius: 8px;
+    position: relative;
+    animation: rotatePhone 2s ease-in-out infinite;
+    margin-bottom: 25px;
+}
+
+.phone-icon-rotate::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #2ea3f2;
+    border-radius: 50%;
+}
+
+@keyframes rotatePhone {
+    0% { transform: rotate(0deg); }
+    40% { transform: rotate(-90deg); }
+    60% { transform: rotate(-90deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.rotate-device-wrapper h2 { font-size: 24px; color: #2ea3f2; margin-bottom: 10px; }
+.rotate-device-wrapper p { font-size: 14px; opacity: 0.8; margin-bottom: 5px; }
+.landscape-text { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+
+/* =====================================
+   📱 التحكم بالظهور بناءً على دوران الهاتف
+===================================== */
+
+/* 1. في الوضع العمودي (Portrait) */
+@media (max-width: 900px) and (orientation: portrait) {
+    /* أظهر رسالة التدوير في البورتفوليو */
+    #portfolio .rotate-device-wrapper {
+        display: flex !important;
+    }
+    
+    /* أخفِ جميع صور البورتفوليو العريضة */
+    #portfolio .only-landscape {
+        display: none !important;
+    }
+}
+
+/* 2. في الوضع الأفقي (Landscape) والكمبيوتر */
+@media (min-width: 901px), (max-width: 900px) and (orientation: landscape) {
+    /* أخفِ رسالة التدوير */
+    .rotate-device-wrapper {
+        display: none !important;
+    }
+    
+    /* أظهر الصور العريضة بشكل متتالي */
+    #portfolio .only-landscape {
+        display: block !important;
+        width: 100%;
+        height: 115vh;
+    }
+}
+
+
+
+/* =============================================
+   1. إعدادات الكمبيوتر فقط (Desktop)
+   ============================================= */
+@media (min-width: 901px) {
+    .email-link {
+        position: absolute;
+        bottom: 500px; /* موقعه من الأسفل في الكمبيوتر */
+        left: 20%;
+        transform: translateX(-50%);
+        width: auto;
+        white-space: nowrap;
+        color: #2ea3f2;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 20px; /* حجم خط كبير للكمبيوتر */
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+        z-index: 20;
+    }
+
+    .email-link:hover {
+        color: #fff;
+        text-shadow: 0 0 15px #2ea3f2;
+        letter-spacing: 4px; /* تأثير تباعد الحروف عند الحوم */
+    }
+}
+
+/* =============================================
+   2. إعدادات الهاتف في الوضع الأفقي (Landscape)
+   ============================================= */
+@media (max-width: 900px) and (orientation: landscape) {
+    .email-link {
+        position: absolute;
+        bottom: 245px; /* موقعه في الهاتف الأفقي */
+        left: 19.5%;
+        transform: translateX(-50%);
+        width: auto;
+        font-size: 12px; /* خط أصغر ليناسب شاشة الهاتف الصغيرة بالعرض */
+        color: #2ea3f2;
+        padding: 5px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        z-index: 20;
+    }
+
+    .email-link:hover {
+        color: #fff;
+        text-shadow: 0 0 15px #2ea3f2;
+    }
+}
+
+/* =============================================
+   3. إعدادات الهاتف في الوضع العمودي (Portrait)
+   ============================================= */
+@media (max-width: 600px) and (orientation: portrait) {
+    .email-link {
+        position: absolute;
+        bottom: 7%; /* موقعه في الهاتف العمودي */
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        font-size: 16px;
+        color: #fff;
+        background: rgba(46, 163, 242, 0.2);
+        padding: 10px 25px;
+        border-radius: 30px;
+        border: 1px solid #2ea3f2;
+        text-decoration: none;
+        z-index: 20;
+        animation: simplePulse 2s infinite; /* نبض خفيف لجذب الانتباه */
+    }
+}
+
+/* أنميشن الضغط (يعمل على جميع الأوضاع) */
+.email-link:active {
+    transform: translateX(-50%) scale(0.9);
+    opacity: 0.8;
+}
+
+@keyframes simplePulse {
+    0% { box-shadow: 0 0 0 0 rgba(46, 163, 242, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(46, 163, 242, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(46, 163, 242, 0); }
+}
+
+
+
+
+
+/* تنسيق الفاصل الأنيق */
+.elegant-divider {
+    position: absolute;
+    bottom: 0; /* يلتصق بأسفل كل صورة */
+    left: 0;
+    width: 100%;
+    height: 1px; /* خط نحيف جداً */
+    background: rgba(255, 255, 255, 0.1); /* خط خلفي باهت جداً */
+    z-index: 10;
+    overflow: hidden;
+}
+
+/* الضوء المتحرك (اللمعة) */
+.elegant-divider::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -100%; /* يبدأ من خارج الشاشة يميناً */
+    width: 100%; /* طول اللمعة */
+    height: 100%;
+    background: linear-gradient(
+        to left, 
+        transparent, 
+        rgba(46, 163, 242, 0.4), /* لون أزرق خفيف */
+        #2ea3f2, 
+        rgba(46, 163, 242, 0.4), 
+        transparent
+    );
+    animation: smoothScan 5s infinite linear;
+}
+
+/* حركة المسح الضوئي من اليمين إلى اليسار */
+@keyframes smoothScan {
+    0% {
+        right: -100%;
+    }
+    100% {
+        right: 150%; /* يتحرك لليسار تماماً */
+    }
+}
+
+/* إضافة تظليل ناعم في أسفل الصورة لدمج الفاصل */
+.image-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to top, #111, transparent);
+    pointer-events: none; /* لا يمنع الضغط على الصورة */
+}
